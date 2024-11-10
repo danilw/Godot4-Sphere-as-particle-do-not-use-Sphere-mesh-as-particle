@@ -7,11 +7,11 @@ To do this:
 
 ![img1](https://danilw.github.io/GLSL-howto/sphere-as-particle-do-not-use-sphere-mesh-as-particle_WEB/sph-quad-1.jpg)
 
-**You do not need spheres-as-particles!**
+**You do not need spheres-mesh-as-particles!**
 
 Use Mesh-Quad and sphIntersect - [Inigo Quilez  articles intersectors](https://iquilezles.org/articles/intersectors/)
 
-Godot Shader code you can see in:
+**Godot Shader code you can see in**: [sphere-as-particle-do-not-use-sphere-mesh-as-particle/Sphere_Quad_shader.gdshader](https://github.com/danilw/Godot4-Sphere-as-particle-do-not-use-Sphere-mesh-as-particle/blob/main/sphere-as-particle-do-not-use-sphere-mesh-as-particle/Sphere_Quad_shader.gdshader)
 
 ___
 
