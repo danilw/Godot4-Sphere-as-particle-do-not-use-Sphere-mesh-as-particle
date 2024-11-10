@@ -1,0 +1,198 @@
+[gd_scene load_steps=21 format=3 uid="uid://nxpeei7djmaw"]
+
+[ext_resource type="Script" path="res://scene.gd" id="1_ciwxb"]
+[ext_resource type="Script" path="res://camera_3d.gd" id="1_imoym"]
+[ext_resource type="Shader" path="res://Sphere_Quad_shader.gdshader" id="2_bcxro"]
+[ext_resource type="Script" path="res://control.gd" id="3_uuem1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wcfb2"]
+
+[sub_resource type="Sky" id="Sky_t2bcp"]
+sky_material = SubResource("ProceduralSkyMaterial_wcfb2")
+process_mode = 3
+
+[sub_resource type="Environment" id="Environment_w8whj"]
+background_mode = 2
+sky = SubResource("Sky_t2bcp")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_c0xt2"]
+size = Vector2(100, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ica3l"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_x86gg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pwps"]
+albedo_color = Color(0.570312, 0.230724, 0.339098, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_litvn"]
+emission_shape = 3
+emission_box_extents = Vector3(50, 0.1, 50)
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+gravity = Vector3(0, -0.1, 0)
+radial_accel_min = -2.0
+radial_accel_max = -2.23517e-06
+tangential_accel_min = -2.0
+tangential_accel_max = -2.23517e-06
+
+[sub_resource type="SphereMesh" id="SphereMesh_ne3u8"]
+radius = 0.335
+height = 0.67
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w8bkf"]
+render_priority = 0
+shader = ExtResource("2_bcxro")
+shader_parameter/use_occ = false
+shader_parameter/cell_shading = false
+shader_parameter/fix_perspective = false
+shader_parameter/use_light_color = true
+shader_parameter/object_color = Vector4(0.2, 0.55, 0.4, 1)
+shader_parameter/base_light_color = Vector4(1, 1, 1, 1)
+shader_parameter/shade_color = Vector4(0, 0, 0, 1)
+shader_parameter/shade_threshold = 0.1
+shader_parameter/shade_softness = 0.02
+shader_parameter/sph_size = 0.64
+
+[sub_resource type="QuadMesh" id="QuadMesh_8ph7i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rb3qc"]
+bg_color = Color(0.6, 0.25016, 0.354817, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bc7nw"]
+bg_color = Color(0.6, 0.179279, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_feqkr"]
+bg_color = Color(0, 0.584434, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4y7gc"]
+bg_color = Color(0.019639, 0.6, 0.0789272, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ofhn3"]
+bg_color = Color(0, 0.16232, 0.6, 1)
+
+[node name="scene" type="Node3D"]
+script = ExtResource("1_ciwxb")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w8whj")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.960235, 0.279192, 0, -0.279192, 0.960235, 0, 2.63798, 6.67018)
+script = ExtResource("1_imoym")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.903545, 0.252709, 0.346042, -0.428494, 0.532875, 0.729683, 0, -0.807578, 0.58976, 0, 1.69133, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_c0xt2")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.617299, -0.822641)
+mesh = SubResource("BoxMesh_ica3l")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.51909, 0.617299, -0.277765)
+mesh = SubResource("SphereMesh_x86gg")
+
+[node name="Sphere-mesh" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.856619, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_6pwps")
+amount = 200
+lifetime = 5.0
+visibility_aabb = AABB(-50, -50, -50, 100, 100, 100)
+process_material = SubResource("ParticleProcessMaterial_litvn")
+draw_pass_1 = SubResource("SphereMesh_ne3u8")
+
+[node name="Quad-mesh" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.856619, 0)
+visible = false
+material_override = SubResource("ShaderMaterial_w8bkf")
+amount = 200
+lifetime = 5.0
+visibility_aabb = AABB(-50, -50, -50, 100, 100, 100)
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_litvn")
+draw_pass_1 = SubResource("QuadMesh_8ph7i")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_uuem1")
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 58.0
+offset_right = 303.0
+offset_bottom = 89.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_rb3qc")
+text = "2000 Mesh-sphere particles"
+
+[node name="Button3" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 830.0
+offset_top = 54.0
+offset_right = 1050.0
+offset_bottom = 85.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_bc7nw")
+text = "20000 Mesh-sphere particles"
+
+[node name="Button2" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 98.0
+offset_right = 304.0
+offset_bottom = 129.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_feqkr")
+text = "2000 Quad-sphere particles"
+
+[node name="Button4" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 830.0
+offset_top = 103.0
+offset_right = 1050.0
+offset_bottom = 134.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_4y7gc")
+text = "20000 Quad-sphere particles"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 45.0
+offset_right = 799.0
+offset_bottom = 198.0
+text = "on Vega8 integrated with 2000 Mesh-sphere - I have 20 fps
+
+on 4060 only at 20000 Sphere Mesh FPS drop to 30.
+
+Each mesh sphere is 64x32 = 2048 polygons
+2048x2000 =  4 millions
+(and I keep shadows for worse perf - you should have shadows off in real use)"
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 11.0
+offset_right = 986.0
+offset_bottom = 34.0
+text = "This is short example to - Why you should use Quad-sphere as particle to display spheres, not sphere-mesh as paricle mesh."
+
+[node name="Label3" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 995.0
+offset_top = 235.0
+offset_right = 1113.0
+offset_bottom = 277.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_ofhn3")
+text = "FPS :123"
+
+[connection signal="pressed" from="Control/Button" to="Control" method="_on_button_pressed"]
+[connection signal="pressed" from="Control/Button3" to="Control" method="_on_button_3_pressed"]
+[connection signal="pressed" from="Control/Button2" to="Control" method="_on_button_2_pressed"]
+[connection signal="pressed" from="Control/Button4" to="Control" method="_on_button_4_pressed"]
