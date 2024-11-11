@@ -13,7 +13,7 @@ Use Mesh-Quad and sphIntersect - [Inigo Quilez  articles intersectors](https://i
 
 **Godot Shader code you can see in**: [sphere-as-particle-do-not-use-sphere-mesh-as-particle/Sphere_Quad_shader.gdshader](https://github.com/danilw/Godot4-Sphere-as-particle-do-not-use-Sphere-mesh-as-particle/blob/main/sphere-as-particle-do-not-use-sphere-mesh-as-particle/Sphere_Quad_shader.gdshader)
 
-*__Please notice__ - this is "not template" or tutorial - **this is just example** - I do not use DEPTH-write here same as "alpha to cut shadows with depth prepass" - can be done better/different.* (this is not perfectly correct code - improve/fix if you need)
+*__Please notice__ - this is "not template" or tutorial - **this is just example** - I do not use DEPTH-write here same as "alpha to cut shadows with depth prepass" - can be done better/different (and quad-mesh not scaled to screen-proportions so it cut sphere on ultra-wide aspect).* (this is not perfectly correct code - improve/fix if you need) (also you can PR if you wanat to improve/fix anything here)
 
 ___
 
