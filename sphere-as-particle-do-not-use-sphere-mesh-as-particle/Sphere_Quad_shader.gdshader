@@ -15,9 +15,9 @@ uniform bool cell_shading=false;
 uniform bool fix_perspective=false;
 uniform bool use_light_color=true;
 
-uniform vec4 object_color = vec4(0.5,0.5,0.5,1.0);
-uniform vec4 base_light_color = vec4(1.0,1.0,1.0,1.0);
-uniform vec4 shade_color = vec4(0.05,0.05,0.05,1.);
+uniform vec4 object_color: source_color = vec4(0.5,0.5,0.5,1.0);
+uniform vec4 base_light_color: source_color = vec4(1.0,1.0,1.0,1.0);
+uniform vec4 shade_color: source_color = vec4(0.05,0.05,0.05,1.);
 
 uniform float shade_threshold : hint_range(-1.0, 1.0, 0.001) = 0.1;
 uniform float shade_softness : hint_range(0.0, 1.0, 0.001) = 0.02;
